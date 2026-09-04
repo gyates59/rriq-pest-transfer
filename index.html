@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rapid Removal IQ &#8212; Program Transfer &amp; Onboarding</title>
+<style>
+  :root { --navy:#0D1B2A; --blue:#0066CC; --orange:#FF6600; --ink:#1A2330; --mut:#6C757D;
+          --line:#E1E5EA; --wash:#F5F7FA; --good:#1F7A3D; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Inter, "Segoe UI", system-ui, Arial, sans-serif; color: var(--ink); background: #EDF1F4; }
+  .wrap { max-width: 800px; margin: 0 auto; padding: 24px 16px 60px; }
+  .card { background: #fff; border-radius: 14px; box-shadow: 0 2px 14px rgba(13,27,42,.10); padding: 0 0 28px; overflow: hidden; }
+  .bar { background: var(--navy); color: #fff; padding: 16px 28px; display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
+  .bar .brand { font-weight: 800; letter-spacing: .04em; font-size: 20px; }
+  .bar .tag { color: var(--orange); font-style: italic; font-size: 13px; letter-spacing: .02em; }
+  .bar .sub { width: 100%; font-size: 11px; color: #AFC0D0; letter-spacing: .04em; }
+  .inner { padding: 22px 28px 0; }
+  @media (max-width: 620px) { .inner { padding: 18px 16px 0; } .bar { padding: 14px 16px; } }
+
+  .kicker { font-size: 11px; letter-spacing: .14em; color: var(--blue); font-weight: 700; text-transform: uppercase; }
+  h1 { font-size: 24px; margin: 6px 0 8px; color: var(--navy); }
+  .lead { font-size: 14px; line-height: 1.55; color: var(--ink); }
+  .callout { background: var(--wash); border-left: 4px solid var(--orange); padding: 12px 16px;
+             font-size: 13.5px; line-height: 1.5; margin: 14px 0 18px; border-radius: 0 8px 8px 0; }
+  h3 { font-size: 12px; color: var(--blue); letter-spacing: .08em; text-transform: uppercase; margin: 22px 0 10px; }
+  h3 .n { display: inline-block; background: var(--navy); color: #fff; border-radius: 6px; padding: 1px 7px; margin-right: 8px; font-size: 11px; }
+  label { display: block; font-size: 12.5px; font-weight: 600; color: var(--navy); margin: 12px 0 4px; }
+  label .req { color: #B00020; }
+  input[type=text], input[type=email], input[type=tel], input[type=url], input[type=number], textarea, select {
+    width: 100%; padding: 9px 12px; border: 1.5px solid var(--line); border-radius: 8px;
+    font-size: 14px; font-family: inherit; background: #FDFEFF; color: var(--ink); }
+  input:focus, textarea:focus, select:focus { outline: 2px solid var(--blue); border-color: var(--blue); }
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0 18px; }
+  .row3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0 14px; }
+  @media (max-width: 620px) { .row2, .row3 { grid-template-columns: 1fr; } }
+  .hint { font-size: 11.5px; color: var(--mut); margin-top: 3px; line-height: 1.4; }
+
+  .live { font-size: 13.5px; line-height: 1.55; margin: 0 0 4px 18px; }
+  .live li { margin-bottom: 5px; }
+  .live b { color: var(--navy); }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 620px) { .grid2 { grid-template-columns: 1fr; } }
+  .box { border: 1.5px solid var(--line); border-radius: 10px; padding: 14px 16px; }
+  .box h4 { font-size: 12px; color: var(--orange); letter-spacing: .06em; text-transform: uppercase; margin-bottom: 8px; }
+  .box ul { margin-left: 18px; font-size: 13px; line-height: 1.5; }
+  .box li { margin-bottom: 3px; }
+
+  .lineitem { display: flex; align-items: flex-start; gap: 12px; border: 1.5px solid var(--line);
+              border-radius: 10px; padding: 13px 15px; margin-bottom: 10px; }
+  .lineitem.locked { background: var(--wash); }
+  .lineitem input { width: 19px; height: 19px; margin-top: 2px; accent-color: var(--navy); flex: none; }
+  .lineitem .t b { font-size: 14px; color: var(--navy); }
+  .lineitem .t .inc { font-size: 9px; font-weight: 700; letter-spacing: .06em; color: var(--good);
+                      background: #E7F4EC; border-radius: 4px; padding: 2px 6px; margin-left: 6px; vertical-align: 2px; }
+  .lineitem .t .opt { font-size: 9px; font-weight: 700; letter-spacing: .06em; color: var(--mut);
+                      border: 1px solid var(--line); border-radius: 4px; padding: 1px 6px; margin-left: 6px; vertical-align: 2px; }
+  .lineitem .t p { font-size: 12px; color: var(--mut); line-height: 1.4; margin-top: 2px; }
+  .lineitem .price { margin-left: auto; font-weight: 700; color: var(--navy); white-space: nowrap; font-size: 14px; text-align: right; }
+  .lineitem .price small { font-weight: 400; color: var(--mut); }
+  .qty { width: 70px !important; padding: 5px 8px !important; font-size: 13px !important; margin-left: 8px; }
+
+  .total { display: flex; justify-content: space-between; align-items: baseline; background: var(--navy);
+           color: #fff; border-radius: 10px; padding: 14px 18px; margin-top: 14px; }
+  .total .lbl { font-size: 13px; letter-spacing: .04em; }
+  .total .lbl span { font-weight: 400; color: #AFC0D0; }
+  .total .amt { font-size: 24px; font-weight: 800; color: var(--orange); }
+  .total.sub { background: var(--wash); color: var(--navy); padding: 11px 18px; margin-top: 8px; }
+  .total.sub .lbl span { color: var(--mut); }
+  .total.sub .amt { font-size: 16px; color: var(--navy); }
+
+  .scope { background: #FBFCFE; border: 1.5px solid var(--line); border-radius: 10px; padding: 14px 16px; font-size: 12.5px; line-height: 1.5; }
+  .scope ul { margin: 6px 0 6px 18px; }
+  .scope li { margin-bottom: 3px; color: var(--mut); }
+  .scope li b { color: var(--navy); }
+
+  .sigblock { background: var(--wash); border-radius: 10px; padding: 16px 18px; margin-top: 10px; }
+  .authbox { display: flex; gap: 10px; align-items: flex-start; margin-top: 12px; font-size: 12.5px; line-height: 1.5; }
+  .authbox input { width: 20px; height: 20px; accent-color: var(--navy); flex: none; margin-top: 1px; }
+  .siginput { font-family: "Segoe Script", "Brush Script MT", cursive; font-size: 20px !important; }
+
+  .terms { font-size: 11px; color: var(--mut); line-height: 1.5; margin-top: 16px; }
+  .submit { width: 100%; background: var(--orange); color: #fff; border: none; border-radius: 10px;
+            padding: 15px; font-size: 16px; font-weight: 700; cursor: pointer; margin-top: 18px; font-family: inherit; }
+  .submit:hover { background: #E05A00; }
+  .submit:disabled { background: #8FA1B8; cursor: wait; }
+  .submit.secondary { background: var(--blue); }
+  .err { color: #B00020; font-size: 13px; margin-top: 10px; display: none; }
+
+  .checks { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 14px; font-size: 13px; margin-top: 6px; }
+  @media (max-width: 620px) { .checks { grid-template-columns: 1fr; } }
+  .checks label { display: flex; gap: 8px; align-items: center; font-weight: 500; margin: 0; }
+  .checks input { width: 17px; height: 17px; accent-color: var(--navy); }
+  .files { border: 1.5px dashed var(--line); border-radius: 10px; padding: 12px 14px; font-size: 13px; background: #FDFEFF; }
+  .files input[type=file] { margin-top: 6px; font-size: 12.5px; }
+  .files .list { font-size: 12px; color: var(--mut); margin-top: 6px; }
+  .pill { display: inline-block; font-size: 11px; background: var(--wash); border: 1px solid var(--line); border-radius: 20px; padding: 2px 9px; margin: 2px 4px 2px 0; }
+  .progress { font-size: 12px; color: var(--mut); margin-top: 8px; }
+  .savebar { background: #FFF6EE; border: 1px solid #FFD9BD; border-radius: 8px; padding: 9px 12px; font-size: 12px; color: #8A4200; margin: 14px 0 4px; }
+
+  #done, #done2 { display: none; text-align: center; padding: 40px 20px; }
+  .big { font-size: 46px; color: var(--good); }
+  #done h2, #done2 h2 { color: var(--navy); margin: 10px 0 8px; }
+  #done p, #done2 p { color: var(--mut); font-size: 14.5px; line-height: 1.6; max-width: 520px; margin: 0 auto 8px; }
+  .paybtn { display: inline-block; background: var(--orange); color: #fff; text-decoration: none; font-weight: 700;
+            padding: 12px 22px; border-radius: 10px; margin: 14px 0 6px; }
+  .foot { text-align: center; font-size: 11px; color: var(--mut); margin-top: 18px; letter-spacing: .04em; line-height: 1.6; }
+  .foot b { color: var(--navy); }
+  #intake { display: none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <div class="bar">
+      <div class="brand">RAPID REMOVAL IQ</div>
+      <div class="tag">WE MAKE YOUR PHONE RING.</div>
+      <div class="sub">One operator per market &#183; 217-335-4060</div>
+    </div>
+
+    <!-- ============ PART 1: TRANSFER AGREEMENT ============ -->
+    <div id="form" class="inner">
+      <div class="kicker">Program transfer &#183; Junk Majesty &#8594; your pest control company</div>
+      <h1>Program Transfer &amp; Onboarding</h1>
+      <p class="lead">Junk Majesty is closing, and the program you already paid for is moving with you. This page
+      does two things: it moves the rest of your prepaid term to your pest control company, and it collects what we
+      need to rebuild everything under the new brand. Sign first, then fill in the onboarding section. About 15 minutes total.</p>
+
+      <div class="callout"><b>What you already have stays yours.</b> Your six-month prepaid subscription started on
+      June 5, 2026 and runs through <b>December 5, 2026</b>. Every remaining month transfers to the pest business in full.
+      No new subscription, no restart of the clock.</div>
+
+      <h3>What transfers with you</h3>
+      <div class="grid2">
+        <div class="box"><h4>Carries over</h4><ul>
+          <li>The rest of your prepaid term, through December 5, 2026</li>
+          <li>Your dedicated business number and call tracking</li>
+          <li>250 targeted postcards mailed every month, postage included</li>
+          <li>The assistant that answers every call, 24/7</li>
+          <li>Follow-up after the call and after the job</li>
+          <li>One operator per market, now for pest control in your territory</li>
+        </ul></div>
+        <div class="box"><h4>Rebuilt under the new brand</h4><ul>
+          <li>Your workspace and phone flows renamed and rebranded</li>
+          <li>A custom pest and termite audience built for your ZIPs</li>
+          <li>Landing page and lead capture in your new brand</li>
+          <li>The assistant retrained on pest services, pricing rules and hours</li>
+          <li>New postcard creative and outreach copy</li>
+          <li>Realtor outreach re-pointed to termite inspections</li>
+        </ul></div>
+      </div>
+
+      <h3>The transfer</h3>
+      <div class="lineitem locked">
+        <input type="checkbox" checked disabled>
+        <div class="t"><b>Transfer &amp; onboarding fee</b><span class="inc">ONE TIME</span>
+          <p>Covers the rebuild above: new brand workspace, pest audience build, landing page, assistant retraining,
+          new creative, and re-pointing every channel to the pest business. Onboarding starts the day this is received.</p></div>
+        <div class="price">$750</div>
+      </div>
+      <div class="lineitem locked">
+        <input type="checkbox" checked disabled>
+        <div class="t"><b>Remaining prepaid subscription</b><span class="inc">ALREADY PAID</span>
+          <p>Through December 5, 2026. After that, the program continues month to month at $1,500 per month
+          with 30 days' notice to cancel, or you can prepay another six months at $7,200. Nothing to decide today.</p></div>
+        <div class="price">$0</div>
+      </div>
+
+      <h3>Optional launch add-on <span style="color:var(--mut);text-transform:none;letter-spacing:0;font-weight:400">(can be added later too)</span></h3>
+      <div class="lineitem">
+        <input type="checkbox" id="o-launch" onchange="recalc()">
+        <div class="t"><b>Launch postcard drop</b><span class="opt">OPTIONAL</span>
+          <p>An extra drop to your highest-intent pest and termite prospects on top of the 250 monthly cards, so the new
+          brand lands with volume in month one. Design, print, addressing and postage included. $1.20 per card.</p>
+          <div style="margin-top:8px;font-size:12.5px;color:var(--navy)">Cards: <select class="qty" id="launchqty" onchange="recalc()">
+            <option value="250">250</option><option value="500" selected>500</option><option value="1000">1,000</option></select></div></div>
+        <div class="price" id="launchprice">+$600</div>
+      </div>
+
+      <div class="total"><span class="lbl">DUE NOW <span id="duewhat">&#183; transfer &amp; onboarding fee</span></span><span class="amt" id="duenow">$750</span></div>
+      <div class="total sub"><span class="lbl">THEN <span>&#183; nothing until your prepaid term ends December 5, 2026</span></span><span class="amt">$0 through 12/05</span></div>
+
+      <h3>Your pest control company</h3>
+      <div class="row2">
+        <div><label>Company name as customers know it <span class="req">*</span></label><input type="text" id="dba" placeholder="The name on the truck"></div>
+        <div><label>Legal business name <span class="req">*</span></label><input type="text" id="legal" placeholder="Exactly as registered (LLC, Inc., etc.)"></div>
+      </div>
+      <div class="row2">
+        <div><label>Best phone for you <span class="req">*</span></label><input type="tel" id="ownerphone" placeholder="Your cell"></div>
+        <div><label>Best email for you <span class="req">*</span></label><input type="email" id="owneremail" placeholder="Where the payment link goes"></div>
+      </div>
+
+      <h3>What happens after you sign</h3>
+      <div class="scope"><ul>
+        <li><b>1. Fill in the onboarding section</b> that opens right below. Save and come back if you need to.</li>
+        <li><b>2. Payment link arrives by email</b> for the $750 due now, billed through our secure link.</li>
+        <li><b>3. We rebuild</b> the workspace, audience, page, assistant and creative under the new brand. About two to three weeks.</li>
+        <li><b>4. Launch call</b> to test the phone flow and approve the first postcard, then the program is live for the pest business.</li>
+      </ul></div>
+
+      <h3>Authorization</h3>
+      <div class="sigblock">
+        <div class="row2">
+          <div><label>Your name <span class="req">*</span></label><input type="text" id="sname" value="Jared Lajaunie"></div>
+          <div><label>Title</label><input type="text" id="stitle" value="Owner"></div>
+        </div>
+        <label>Type your full name as your signature <span class="req">*</span></label>
+        <input type="text" id="sig" class="siginput" placeholder="Signature">
+        <div class="authbox">
+          <input type="checkbox" id="auth">
+          <span>I am authorized to sign for the company named above. By executing this page, the remaining term of the Rapid
+          Removal IQ program agreement signed June 5, 2026 for Junk Majesty transfers to that company, and all of its terms
+          continue unchanged, including the month to month continuation at $1,500 per month after the prepaid term ends on
+          December 5, 2026 unless cancelled with 30 days' written notice. The $750 transfer and onboarding fee is one time and
+          non-refundable once paid, and onboarding begins when it is received. The Junk Majesty program is deactivated on
+          transfer, with no refund or credit for months already used. Optional launch postcards are billed as ordered. Ad spend,
+          additional postcards, third-party platform fees and usage fees are billed as in the original agreement.</span>
+        </div>
+      </div>
+
+      <div class="err" id="err"></div>
+      <button class="submit" id="go" onclick="submitTransfer()">Execute Transfer &amp; Continue to Onboarding</button>
+      <div class="terms">Accepted for Rapid Removal IQ, a program of Groupserv Management LLC / Rapid IQ Group, Casey, IL.
+      Questions: 217-335-4060. Fees exclude any applicable taxes.</div>
+    </div>
+
+    <!-- ============ PART 2: ONBOARDING INTAKE ============ -->
+    <div id="intake" class="inner">
+      <div class="kicker">Onboarding &#183; tell us about the pest business</div>
+      <h1>Onboarding Information</h1>
+      <p class="lead">Everything we need to rebuild the program under your brand. Required items are marked. Skip anything
+      you do not have handy; we will ask on the launch call. Your answers save on this device as you go.</p>
+      <div class="savebar" id="savebar">Answers save automatically on this device. You can close this page and come back to it.</div>
+
+      <h3><span class="n">1</span>Company</h3>
+      <div class="row2">
+        <div><label>Company name as customers know it <span class="req">*</span></label><input type="text" id="i_dba" data-k="Company name (DBA)"></div>
+        <div><label>Legal business name <span class="req">*</span></label><input type="text" id="i_legal" data-k="Legal business name"></div>
+      </div>
+      <div class="row3">
+        <div><label>Entity type</label><select id="i_entity" data-k="Entity type"><option value="">Select</option><option>LLC</option><option>S-Corp</option><option>C-Corp</option><option>Sole proprietor</option><option>Partnership</option><option>Other</option></select></div>
+        <div><label>State of formation</label><input type="text" id="i_state" data-k="State of formation" value="Louisiana"></div>
+        <div><label>Year founded</label><input type="text" id="i_founded" data-k="Year founded"></div>
+      </div>
+      <div class="row2">
+        <div><label>Federal EIN <span class="req">*</span></label><input type="text" id="i_ein" data-k="Federal EIN" placeholder="XX-XXXXXXX"><div class="hint">Needed to register the business for texting with the carriers. Stored privately.</div></div>
+        <div><label>Website (if any)</label><input type="text" id="i_web" data-k="Website"></div>
+      </div>
+      <label>Business address <span class="req">*</span></label><input type="text" id="i_addr" data-k="Business address" placeholder="Street, city, state, ZIP">
+      <label>Mailing address (if different)</label><input type="text" id="i_mail" data-k="Mailing address">
+      <label>Other domains or old business names customers might search</label><input type="text" id="i_domains" data-k="Other domains / names">
+
+      <h3><span class="n">2</span>Owner &amp; who answers the phone</h3>
+      <div class="row2">
+        <div><label>Owner full name <span class="req">*</span></label><input type="text" id="i_owner" data-k="Owner full name" value="Jared Lajaunie"></div>
+        <div><label>Owner title</label><input type="text" id="i_title" data-k="Owner title" value="Owner"></div>
+      </div>
+      <div class="row2">
+        <div><label>Owner mobile <span class="req">*</span></label><input type="tel" id="i_ophone" data-k="Owner mobile"></div>
+        <div><label>Owner email <span class="req">*</span></label><input type="email" id="i_oemail" data-k="Owner email"></div>
+      </div>
+      <div class="row2">
+        <div><label>Who should live calls transfer to? <span class="req">*</span></label><input type="text" id="i_answers" data-k="Live call transfer: who" placeholder="Name"></div>
+        <div><label>Their mobile <span class="req">*</span></label><input type="tel" id="i_answersphone" data-k="Live call transfer: number"></div>
+      </div>
+      <div class="row2">
+        <div><label>Second contact (office, spouse, manager)</label><input type="text" id="i_second" data-k="Second contact" placeholder="Name and number"></div>
+        <div><label>Business hours</label><input type="text" id="i_hours" data-k="Business hours" placeholder="Mon-Fri 7-5, Sat 8-12"></div>
+      </div>
+      <label>After hours: what should the assistant promise a caller?</label><input type="text" id="i_afterhours" data-k="After-hours promise" placeholder="Callback first thing in the morning, or transfer emergencies to a cell">
+
+      <h3><span class="n">3</span>Licenses &amp; compliance</h3>
+      <div class="row2">
+        <div><label>Louisiana pest control license number</label><input type="text" id="i_lic" data-k="LA pest control license #"><div class="hint">Structural pest control license from the LDAF. Goes on postcards and the site where required.</div></div>
+        <div><label>Licensed operator name</label><input type="text" id="i_licname" data-k="Licensed operator name"></div>
+      </div>
+      <div class="row2">
+        <div><label>Insurance carrier</label><input type="text" id="i_ins" data-k="Insurance carrier"></div>
+        <div><label>Authorized rep for texting registration</label><input type="text" id="i_a2p" data-k="Texting registration rep" placeholder="Name and title"><div class="hint">The person the carriers list as responsible for your business texting.</div></div>
+      </div>
+
+      <h3><span class="n">4</span>Services &amp; market</h3>
+      <label>Services you offer <span class="req">*</span></label>
+      <div class="checks" id="i_services" data-k="Services offered">
+        <label><input type="checkbox" value="General pest control"> General pest control</label>
+        <label><input type="checkbox" value="Termite treatment"> Termite treatment</label>
+        <label><input type="checkbox" value="Termite / WDIR inspections"> Termite / WDIR inspections for closings</label>
+        <label><input type="checkbox" value="Quarterly / annual contracts"> Quarterly or annual contracts</label>
+        <label><input type="checkbox" value="Mosquito"> Mosquito</label>
+        <label><input type="checkbox" value="Rodent / wildlife"> Rodent and wildlife</label>
+        <label><input type="checkbox" value="Bed bugs"> Bed bugs</label>
+        <label><input type="checkbox" value="Commercial accounts"> Commercial accounts</label>
+        <label><input type="checkbox" value="Lawn / ornamental"> Lawn and ornamental</label>
+        <label><input type="checkbox" value="Real estate / property management"> Real estate and property management</label>
+      </div>
+      <label>Services you do NOT offer, or jobs to turn away</label><input type="text" id="i_noservices" data-k="Services NOT offered">
+      <div class="row2">
+        <div><label>Residential vs commercial mix today</label><input type="text" id="i_mix" data-k="Residential / commercial mix" placeholder="e.g. 70% residential, 30% commercial"></div>
+        <div><label>Commercial accounts you most want</label><input type="text" id="i_commercial" data-k="Commercial targets wanted" placeholder="Restaurants, property managers, hotels, warehouses..."></div>
+      </div>
+      <label>ZIP codes you want to own <span class="req">*</span></label>
+      <textarea id="i_zips" rows="2" data-k="Territory ZIPs">70001, 70002, 70003, 70005, 70006, 70056, 70058, 70062, 70065, 70072, 70115, 70118, 70119, 70124, 70125</textarea>
+      <div class="hint">Pre-filled with the Junk Majesty territory. Add, remove or replace.</div>
+      <div class="row2">
+        <div><label>Service radius</label><input type="text" id="i_radius" data-k="Service radius" placeholder="40 miles from 70125"></div>
+        <div><label>Primary city for copy</label><input type="text" id="i_city" data-k="Primary city" placeholder="Kenner, Metairie, New Orleans..."></div>
+      </div>
+      <label>Pricing rule for the assistant</label><input type="text" id="i_pricing" data-k="Pricing rule (assistant)" placeholder="e.g. Never quote on the phone; inspections are free; quarterly starts at $X">
+      <label>Scheduling rule for the assistant</label><input type="text" id="i_sched" data-k="Scheduling rule (assistant)" placeholder="e.g. Book inspections same week; emergencies same day">
+      <label>Anything the assistant should never say or promise</label><input type="text" id="i_never" data-k="Assistant: never say">
+
+      <h3><span class="n">5</span>Numbers &amp; systems you have today</h3>
+      <div class="row2">
+        <div><label>Main business number customers call today</label><input type="tel" id="i_mainphone" data-k="Current main business number"></div>
+        <div><label>Who provides that number (carrier / app)</label><input type="text" id="i_phoneprov" data-k="Phone provider"></div>
+      </div>
+      <div class="row2">
+        <div><label>CRM or scheduling software</label><input type="text" id="i_crm" data-k="CRM / scheduling software" placeholder="Jobber, PestPac, FieldRoutes, none..."></div>
+        <div><label>Email provider for the business</label><input type="text" id="i_emailprov" data-k="Email provider" placeholder="Gmail, Google Workspace, Outlook..."></div>
+      </div>
+      <div class="row3">
+        <div><label>Google Business Profile?</label><select id="i_gbp" data-k="Google Business Profile"><option value="">Select</option><option>Yes</option><option>No</option><option>Not sure</option></select></div>
+        <div><label>Google Ads account?</label><select id="i_gads" data-k="Google Ads account"><option value="">Select</option><option>Yes</option><option>No</option></select></div>
+        <div><label>Meta (Facebook) ad account?</label><select id="i_meta" data-k="Meta ad account"><option value="">Select</option><option>Yes</option><option>No</option></select></div>
+      </div>
+      <label>Google review link (if you have it)</label><input type="text" id="i_reviewlink" data-k="Google review link">
+      <div class="row3">
+        <div><label>Trucks</label><input type="text" id="i_trucks" data-k="Trucks"></div>
+        <div><label>Technicians</label><input type="text" id="i_techs" data-k="Technicians"></div>
+        <div><label>Active customers on file (approx.)</label><input type="text" id="i_custcount" data-k="Customer list size"><div class="hint">We can run a reactivation to past customers.</div></div>
+      </div>
+      <div class="row2">
+        <div><label>Current monthly revenue (approx.)</label><input type="text" id="i_rev" data-k="Current monthly revenue"></div>
+        <div><label>Monthly revenue goal</label><input type="text" id="i_goal" data-k="Monthly revenue goal"></div>
+      </div>
+
+      <h3><span class="n">6</span>Marketing so far</h3>
+      <label>What has worked for the pest business</label><input type="text" id="i_worked" data-k="What has worked">
+      <label>What has not worked</label><input type="text" id="i_notworked" data-k="What has not worked">
+      <div class="row2">
+        <div><label>Current monthly marketing spend</label><input type="text" id="i_spend" data-k="Current marketing spend"></div>
+        <div><label>Current offer or promotion (if any)</label><input type="text" id="i_offer" data-k="Current offer"></div>
+      </div>
+      <label>Competitors you watch</label><input type="text" id="i_comp" data-k="Competitors">
+
+      <h3><span class="n">7</span>Brand kit</h3>
+      <div class="row2">
+        <div><label>Tagline (if you have one)</label><input type="text" id="i_tagline" data-k="Tagline"></div>
+        <div><label>Brand colors</label><input type="text" id="i_colors" data-k="Brand colors" placeholder="Hex codes or just describe them"></div>
+      </div>
+      <div class="row2">
+        <div><label>Instagram</label><input type="text" id="i_ig" data-k="Instagram"></div>
+        <div><label>Facebook</label><input type="text" id="i_fb" data-k="Facebook"></div>
+      </div>
+      <label>Your story in two or three sentences (who you are, why pest control, the local angle)</label>
+      <textarea id="i_story" rows="3" data-k="Owner story"></textarea>
+      <label>Six short words or phrases that describe how you run the business</label>
+      <input type="text" id="i_values" data-k="Six values" placeholder="Licensed and insured, shows up on time, ...">
+      <label>Three customer reviews we can quote (name, city, and what they said)</label>
+      <textarea id="i_reviews" rows="4" data-k="Testimonials" placeholder="Paste from Google or Facebook. Real names and cities."></textarea>
+      <label>Logo and photos</label>
+      <div class="files">
+        <b>Upload your logo, a photo of you, and truck or team photos.</b> Phone photos are perfect. Up to 8 files.
+        <input type="file" id="i_files" multiple accept="image/*,.pdf" onchange="pickFiles(this)">
+        <div class="list" id="filelist">No files yet.</div>
+        <div class="hint">Photos are resized before upload so this stays fast on a phone. Or text them to 217-335-4060 later.</div>
+      </div>
+      <label>Link to a folder of photos (Google Drive, Dropbox), if easier</label><input type="text" id="i_photolink" data-k="Photo folder link">
+
+      <h3><span class="n">8</span>Anything else</h3>
+      <textarea id="i_notes" rows="3" data-k="Notes" placeholder="Seasonal patterns, a launch date you want to hit, questions for the launch call."></textarea>
+
+      <div class="err" id="err2"></div>
+      <button class="submit secondary" id="go2" onclick="submitIntake()">Send Onboarding Information</button>
+      <div class="progress" id="prog"></div>
+    </div>
+
+    <div id="done">
+      <div class="big">&#10003;</div>
+      <h2>Transfer received.</h2>
+      <p>Your payment link for the $750 transfer and onboarding fee is on its way by email. Onboarding starts the day it lands.</p>
+      <p id="paywrap"></p>
+    </div>
+
+    <div id="done2">
+      <div class="big">&#10003;</div>
+      <h2>Got it. The rebuild starts now.</h2>
+      <p>Thank you. We will review everything, move your photos into the new brand workspace, and reach out to set the launch call.
+      Expect a preview of the new landing page and postcard within two to three weeks.</p>
+      <p>Anything to add? Text 217-335-4060.</p>
+    </div>
+  </div>
+  <div class="foot"><b>RAPID REMOVAL IQ</b> &#183; One operator per market. When your town is taken, it's taken.<br>
+  RapidRemovalIQ.com &#183; 217-335-4060 &#183; A program of Groupserv Management LLC / Rapid IQ Group &#183; Casey, IL</div>
+</div>
+
+<script>
+const ENDPOINT = "https://pboxaamvtrgwnhgfccbv.supabase.co/functions/v1/proposal-submit";
+const TOKEN = "gsm-proposal-2026";
+const PROGRAM = "rriq-pest";
+const FEE = 750, CARD = 1.20;
+const PAY_LINK = ""; // Stripe payment link for the $750 fee; when set, the done screen shows a Pay Now button.
+const STORE = "rriq_pest_transfer";
+const $ = id => document.getElementById(id);
+const val = id => ($(id).value || "").trim();
+
+function launchCards() { return $("o-launch").checked ? parseInt($("launchqty").value, 10) : 0; }
+function recalc() {
+  const cards = launchCards();
+  const add = Math.round(cards * CARD);
+  $("launchprice").textContent = "+$" + Math.round(parseInt($("launchqty").value, 10) * CARD).toLocaleString();
+  $("duenow").textContent = "$" + (FEE + add).toLocaleString();
+  $("duewhat").innerHTML = cards ? "&#183; fee + " + cards.toLocaleString() + " launch cards" : "&#183; transfer &amp; onboarding fee";
+}
+recalc();
+
+function showErr(id, m) { const e = $(id); e.textContent = m; e.style.display = "block"; e.scrollIntoView({ block: "center" }); }
+function saveState(o) { try { localStorage.setItem(STORE, JSON.stringify(o)); } catch (_) {} }
+function loadState() { try { return JSON.parse(localStorage.getItem(STORE) || "null"); } catch (_) { return null; } }
+
+async function submitTransfer() {
+  $("err").style.display = "none";
+  if (!val("dba") || !val("legal")) return showErr("err", "Please enter the company name and legal business name.");
+  if (!val("ownerphone") || !val("owneremail")) return showErr("err", "Please enter your phone and email.");
+  if (!val("sname")) return showErr("err", "Please enter your name.");
+  if (!val("sig")) return showErr("err", "Please type your name as your signature.");
+  if (!$("auth").checked) return showErr("err", "Please check the authorization box.");
+  const cards = launchCards(), add = Math.round(cards * CARD), due = FEE + add;
+  const btn = $("go"); btn.disabled = true; btn.textContent = "Executing…";
+  try {
+    const res = await fetch(ENDPOINT, { method: "POST", headers: { "content-type": "application/json" },
+      body: JSON.stringify({
+        token: TOKEN, program: PROGRAM,
+        territory_name: val("dba"),
+        plan: "transfer-remaining-term",
+        plan_label: "Program transfer from Junk Majesty: remaining prepaid term through 2026-12-05 + $750 transfer/onboarding fee" +
+          (cards ? " + launch drop " + cards + " cards $" + add : ""),
+        setup_fee: FEE, due_now: due, monthly_total: 0, term_months: 0,
+        payment_method: "card",
+        admin: { name: val("sname"), email: val("owneremail") },
+        chairs: [],
+        zips_text: "TRANSFER: Junk Majesty -> " + val("dba") + " (" + val("legal") + ") | remaining prepaid term through 2026-12-05 transfers | $750 fee due now" +
+          (cards ? " | LAUNCH DROP: " + cards + " cards at $1.20 = $" + add : " | launch drop: none") +
+          " | owner phone " + val("ownerphone") + " | after 12/05: month-to-month $1,500 or 6-mo prepay $7,200 (original terms)",
+        delivery_endpoint: val("ownerphone"), website: "",
+        signer_name: val("sname"), signer_title: val("stitle"), signer_org: val("legal"),
+        signer_email: val("owneremail"), signature_typed: val("sig"), authorized: true
+      })});
+    const j = await res.json();
+    if (!res.ok || !j.ok) throw new Error(j.error || "submit failed");
+    const st = loadState() || {};
+    st.signed = { id: j.id, name: val("sname"), title: val("stitle"), email: val("owneremail"), phone: val("ownerphone"), dba: val("dba"), legal: val("legal"), at: new Date().toISOString() };
+    saveState(st);
+    openIntake(st.signed, true);
+  } catch (e) {
+    btn.disabled = false; btn.textContent = "Execute Transfer & Continue to Onboarding";
+    showErr("err", "Something went wrong sending this. Please try again, or call 217-335-4060.");
+  }
+}
+
+function openIntake(signed, fresh) {
+  $("form").style.display = "none";
+  if (fresh) {
+    $("done").style.display = "block";
+    if (PAY_LINK) $("paywrap").innerHTML = '<a class="paybtn" href="' + PAY_LINK + '" target="_blank" rel="noopener">Pay the $750 now</a>';
+    $("done").insertAdjacentHTML("beforeend", '<p style="margin-top:10px"><b>One more step:</b> the onboarding questions are right below.</p>');
+  }
+  $("intake").style.display = "block";
+  if (signed) {
+    if (!val("i_dba")) $("i_dba").value = signed.dba || "";
+    if (!val("i_legal")) $("i_legal").value = signed.legal || "";
+    if (!val("i_owner")) $("i_owner").value = signed.name || "";
+    if (!val("i_title")) $("i_title").value = signed.title || "";
+    if (!val("i_oemail")) $("i_oemail").value = signed.email || "";
+    if (!val("i_ophone")) $("i_ophone").value = signed.phone || "";
+  }
+  restoreIntake();
+  if (fresh) $("intake").scrollIntoView({ behavior: "smooth" });
+}
+
+// ----- intake persistence -----
+function intakeFields() { return Array.from(document.querySelectorAll("#intake [data-k]")); }
+function readIntake() {
+  const o = {};
+  intakeFields().forEach(el => {
+    const k = el.getAttribute("data-k");
+    if (el.classList.contains("checks")) o[k] = Array.from(el.querySelectorAll("input:checked")).map(i => i.value);
+    else o[k] = (el.value || "").trim();
+  });
+  return o;
+}
+function writeIntake(o) {
+  intakeFields().forEach(el => {
+    const k = el.getAttribute("data-k"); if (!(k in o)) return;
+    if (el.classList.contains("checks")) el.querySelectorAll("input").forEach(i => { i.checked = (o[k] || []).includes(i.value); });
+    else if (o[k]) el.value = o[k];
+  });
+}
+function persist() { const st = loadState() || {}; st.intake = readIntake(); saveState(st); }
+function restoreIntake() { const st = loadState(); if (st && st.intake) writeIntake(st.intake); }
+document.addEventListener("input", e => { if (e.target.closest("#intake")) persist(); });
+document.addEventListener("change", e => { if (e.target.closest("#intake")) persist(); });
+
+// ----- files (resized client-side) -----
+let FILES = [];
+async function pickFiles(input) {
+  const list = Array.from(input.files || []).slice(0, 8);
+  FILES = [];
+  $("filelist").textContent = "Preparing " + list.length + " file(s)…";
+  for (const f of list) {
+    try { FILES.push(await prep(f)); } catch (e) { console.error(e); }
+  }
+  $("filelist").innerHTML = FILES.length ? FILES.map(f => '<span class="pill">' + f.name + " (" + Math.round(f.data.length * 0.75 / 1024) + " KB)</span>").join("") : "No files yet.";
+}
+function prep(file) {
+  return new Promise((resolve, reject) => {
+    const isImg = /^image\//.test(file.type);
+    if (!isImg || file.size < 700 * 1024) {
+      const r = new FileReader();
+      r.onload = () => resolve({ name: file.name, type: file.type, data: String(r.result).split(",")[1] });
+      r.onerror = reject; r.readAsDataURL(file); return;
+    }
+    const img = new Image();
+    img.onload = () => {
+      const max = 1800, s = Math.min(1, max / Math.max(img.width, img.height));
+      const c = document.createElement("canvas"); c.width = Math.round(img.width * s); c.height = Math.round(img.height * s);
+      c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
+      const png = /png/.test(file.type) && /logo/i.test(file.name);
+      const url = png ? c.toDataURL("image/png") : c.toDataURL("image/jpeg", 0.86);
+      resolve({ name: file.name.replace(/\.[^.]+$/, "") + (png ? ".png" : ".jpg"), type: png ? "image/png" : "image/jpeg", data: url.split(",")[1] });
+    };
+    img.onerror = reject;
+    img.src = URL.createObjectURL(file);
+  });
+}
+
+async function submitIntake() {
+  $("err2").style.display = "none";
+  const need = [["i_dba", "company name"], ["i_legal", "legal business name"], ["i_ein", "EIN"], ["i_addr", "business address"],
+    ["i_owner", "owner name"], ["i_ophone", "owner mobile"], ["i_oemail", "owner email"], ["i_answers", "who live calls transfer to"],
+    ["i_answersphone", "their mobile"], ["i_zips", "ZIP codes"]];
+  for (const [id, lbl] of need) if (!val(id)) return showErr("err2", "Please fill in the " + lbl + ".");
+  const intake = readIntake();
+  if (!intake["Services offered"].length) return showErr("err2", "Please check at least one service you offer.");
+  const st = loadState() || {}; const signed = st.signed || {};
+  const btn = $("go2"); btn.disabled = true; btn.textContent = "Sending…";
+  $("prog").textContent = FILES.length ? "Uploading " + FILES.length + " file(s)…" : "";
+  try {
+    const res = await fetch(ENDPOINT, { method: "POST", headers: { "content-type": "application/json" },
+      body: JSON.stringify({
+        token: TOKEN, program: PROGRAM + "-intake",
+        territory_name: intake["Company name (DBA)"],
+        plan: "onboarding-intake", plan_label: "Onboarding intake (program transfer from Junk Majesty)",
+        setup_fee: 0, due_now: 0, monthly_total: 0,
+        admin: { name: intake["Owner full name"], email: intake["Owner email"] },
+        chairs: [],
+        zips_text: "INTAKE for " + intake["Company name (DBA)"] + " | transfer submission " + (signed.id || "n/a") + " | services: " + intake["Services offered"].join(", ") + " | ZIPs: " + intake["Territory ZIPs"],
+        delivery_endpoint: intake["Owner mobile"], website: intake["Website"],
+        intake, files: FILES,
+        signer_name: intake["Owner full name"], signer_title: intake["Owner title"], signer_org: intake["Legal business name"],
+        signer_email: intake["Owner email"], signature_typed: intake["Owner full name"], authorized: true
+      })});
+    const j = await res.json();
+    if (!res.ok || !j.ok) throw new Error(j.error || "submit failed");
+    st.intakeSent = { id: j.id, at: new Date().toISOString() }; saveState(st);
+    $("intake").style.display = "none"; $("done").style.display = "none"; $("done2").style.display = "block";
+    window.scrollTo({ top: 0 });
+  } catch (e) {
+    btn.disabled = false; btn.textContent = "Send Onboarding Information"; $("prog").textContent = "";
+    showErr("err2", "Something went wrong sending this. Please try again, or text 217-335-4060.");
+  }
+}
+
+// ----- entry -----
+(function init() {
+  const q = new URLSearchParams(location.search);
+  const st = loadState();
+  if (st && st.intakeSent) { $("form").style.display = "none"; $("done2").style.display = "block"; return; }
+  if (q.get("intake") === "1" || (st && st.signed)) openIntake(st ? st.signed : null, false);
+})();
+</script>
+</body>
+</html>
