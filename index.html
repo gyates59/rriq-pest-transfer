@@ -318,7 +318,7 @@
       <!-- ============ AUTHORIZATION ============ -->
       <h2>Authorization</h2>
       <div class="scope" style="margin-bottom:6px"><b style="color:var(--navy)">What happens after you sign</b><ul>
-        <li><b>1. Payment link arrives by email</b> for the $750 due now, billed through our secure link.</li>
+        <li><b>1. Pay the $750</b> on the confirmation screen right after you sign, or from the link we email you.</li>
         <li><b>2. We rebuild</b> the workspace, audience, page and creative under the new brand. About two to three weeks.</li>
         <li><b>3. Launch call</b> to test the phone forward and approve the first postcard, then the program is live for the pest business.</li>
       </ul></div>
@@ -351,7 +351,7 @@
     <div id="done">
       <div class="big">&#10003;</div>
       <h2>Received. The rebuild starts now.</h2>
-      <p>Your payment link for the $750 transfer and onboarding fee is on its way by email. Onboarding starts the day it lands.
+      <p>Pay the $750 transfer and onboarding fee below, or from the link we email you. Onboarding starts the day it lands.
       We will review everything you sent, move your photos into the new brand workspace, and reach out to set the launch call.
       Expect a preview of the new landing page and postcard within two to three weeks.</p>
       <p id="paywrap"></p>
@@ -367,7 +367,7 @@ const ENDPOINT = "https://pboxaamvtrgwnhgfccbv.supabase.co/functions/v1/proposal
 const TOKEN = "gsm-proposal-2026";
 const PROGRAM = "rriq-pest";
 const FEE = 750, CARD = 1.20;
-const PAY_LINK = ""; // Stripe payment link for the $750 fee; when set, the done screen shows a Pay Now button.
+const PAY_LINK = "https://links.groupserv.biz/payment-link/6a9ad982ceb12d9fc1a8b13e"; // Stripe payment link for the $750 fee; when set, the done screen shows a Pay Now button.
 const STORE = "rriq_pest_transfer_v2";
 const $ = id => document.getElementById(id);
 const val = id => ($(id).value || "").trim();
