@@ -188,7 +188,7 @@
       </div>
       <div class="row3">
         <div><label>Entity type <span class="req">*</span></label><select id="i_entity" data-k="Entity type"><option value="">Select</option><option>LLC</option><option>S-Corp</option><option>C-Corp</option><option>Sole proprietor</option><option>Partnership</option><option>Other</option></select></div>
-        <div><label>State of formation <span class="req">*</span></label><input type="text" id="i_state" data-k="State of formation" value="Louisiana"></div>
+        <div><label>State of formation <span class="req">*</span></label><input type="text" id="i_state" data-k="State of formation" placeholder="Louisiana, Mississippi..."></div>
         <div><label>Year founded</label><input type="text" id="i_founded" data-k="Year founded"></div>
       </div>
       <div class="row2">
@@ -196,6 +196,7 @@
         <div><label>Website (if any)</label><input type="text" id="i_web" data-k="Website"></div>
       </div>
       <label>Business address <span class="req">*</span></label><input type="text" id="i_addr" data-k="Business address" placeholder="Street, city, state, ZIP">
+      <label>Metro area or region you serve <span class="req">*</span></label><input type="text" id="i_region" data-k="Region served" placeholder="e.g. Greater New Orleans, Gulf Coast, Northshore, Jackson metro">
       <label>Mailing address (if different)</label><input type="text" id="i_mail" data-k="Mailing address">
       <label>Other domains or old business names customers might search</label><input type="text" id="i_domains" data-k="Other domains / names">
 
@@ -223,8 +224,12 @@
 
       <h3><span class="n">3</span>Licenses &amp; compliance</h3>
       <div class="row2">
-        <div><label>Louisiana pest control license number <span class="req">*</span></label><input type="text" id="i_lic" data-k="LA pest control license #"><div class="hint">Structural pest control license from the LDAF. Goes on postcards and the site where required.</div></div>
+        <div><label>Pest control license number <span class="req">*</span></label><input type="text" id="i_lic" data-k="Pest control license #"><div class="hint">Your state structural pest control license. Goes on postcards and the site where required.</div></div>
         <div><label>Licensed operator name <span class="req">*</span></label><input type="text" id="i_licname" data-k="Licensed operator name"></div>
+      </div>
+      <div class="row2">
+        <div><label>State(s) that issued the license <span class="req">*</span></label><input type="text" id="i_licstate" data-k="License state(s)" placeholder="Louisiana, Mississippi, both..."></div>
+        <div><label>State(s) you operate in <span class="req">*</span></label><input type="text" id="i_opstates" data-k="Operating state(s)"></div>
       </div>
       <div class="row2">
         <div><label>Insurance carrier</label><input type="text" id="i_ins" data-k="Insurance carrier"></div>
@@ -251,11 +256,11 @@
         <div><label>Commercial accounts you most want <span class="req">*</span></label><input type="text" id="i_commercial" data-k="Commercial targets wanted" placeholder="Restaurants, property managers, hotels, warehouses..."></div>
       </div>
       <label>ZIP codes you want to own <span class="req">*</span></label>
-      <textarea id="i_zips" rows="2" data-k="Territory ZIPs">70001, 70002, 70003, 70005, 70006, 70056, 70058, 70062, 70065, 70072, 70115, 70118, 70119, 70124, 70125</textarea>
-      <div class="hint">Pre-filled with the Junk Majesty territory. Add, remove or replace.</div>
+      <textarea id="i_zips" rows="3" data-k="Territory ZIPs" placeholder="List every ZIP code, separated by commas"></textarea>
+      <div class="hint">This becomes your territory. Your Junk Majesty territory is on file if you want any of it back; list only what fits the pest business.</div>
       <div class="row2">
-        <div><label>Service radius</label><input type="text" id="i_radius" data-k="Service radius" placeholder="40 miles from 70125"></div>
-        <div><label>Primary city for copy <span class="req">*</span></label><input type="text" id="i_city" data-k="Primary city" placeholder="Kenner, Metairie, New Orleans..."></div>
+        <div><label>Service radius</label><input type="text" id="i_radius" data-k="Service radius" placeholder="e.g. 40 miles from your shop"></div>
+        <div><label>Primary city you want to be known in <span class="req">*</span></label><input type="text" id="i_city" data-k="Primary city"></div>
       </div>
       <label>Your best offer for a first-time customer</label><input type="text" id="i_offer" data-k="Lead offer" placeholder="Free inspection, $50 off first service, free termite inspection with closing...">
 
@@ -450,10 +455,10 @@ function prep(file) {
 // ----- one submission: agreement + onboarding together -----
 const REQUIRED = [
   ["i_dba", "company name"], ["i_legal", "legal business name"], ["i_entity", "entity type"], ["i_state", "state of formation"],
-  ["i_ein", "federal EIN"], ["i_addr", "business address"],
+  ["i_ein", "federal EIN"], ["i_addr", "business address"], ["i_region", "region you serve"],
   ["i_owner", "owner name"], ["i_ophone", "owner mobile"], ["i_oemail", "owner email"],
   ["i_forward", "number your marketing calls forward to"], ["i_answers", "who answers that line"], ["i_hours", "business hours"],
-  ["i_lic", "Louisiana pest control license number"], ["i_licname", "licensed operator name"], ["i_a2p", "texting registration rep"],
+  ["i_lic", "pest control license number"], ["i_licname", "licensed operator name"], ["i_licstate", "state that issued the license"], ["i_opstates", "states you operate in"], ["i_a2p", "texting registration rep"],
   ["i_mix", "residential vs commercial mix"], ["i_commercial", "commercial accounts you want"], ["i_zips", "ZIP codes"], ["i_city", "primary city"],
   ["i_crm", "CRM or scheduling software"], ["i_gbp", "Google Business Profile answer"], ["i_trucks", "number of trucks"], ["i_techs", "number of technicians"],
   ["i_story", "your story"],
