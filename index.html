@@ -171,7 +171,10 @@
         <div class="price" id="launchprice">$600</div>
       </div>
 
-      <div class="total"><span class="lbl">DUE NOW <span>&#183; transfer &amp; onboarding fee, by secure payment link</span></span><span class="amt">$750</span></div>
+      <label style="margin-top:14px">How you will pay</label>
+      <label id="c-ach" style="display:flex;gap:12px;align-items:flex-start;border:1.5px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:8px;cursor:pointer"><input type="radio" name="pay" value="ach" checked onchange="recalc()" style="width:19px;height:19px;accent-color:var(--navy)"><span><b style="display:block;color:var(--navy)">Bank transfer (ACH)</b><span style="font-size:12.5px;color:var(--mut)">Included, no processing fee.</span></span></label>
+      <label id="c-card" style="display:flex;gap:12px;align-items:flex-start;border:1.5px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:8px;cursor:pointer"><input type="radio" name="pay" value="card" onchange="recalc()" style="width:19px;height:19px;accent-color:var(--navy)"><span><b style="display:block;color:var(--navy)">Credit card</b><span style="font-size:12.5px;color:var(--mut)">Adds 3% processing.</span></span></label>
+      <div class="total"><span class="lbl">YOUR INVOICE <span id="duewhat">&#183; transfer &amp; onboarding fee, by bank transfer</span></span><span class="amt" id="duenow">$750</span></div>
       <div class="total sub" id="launchrow" style="display:none"><span class="lbl">WHEN IT DROPS <span>&#183; launch postcards, billed at proof approval</span></span><span class="amt" id="launchamt">$600</span></div>
       <div class="total sub"><span class="lbl">THEN <span>&#183; nothing until your prepaid term ends December 5, 2026</span></span><span class="amt">$0 through 12/05</span></div>
 
@@ -323,7 +326,7 @@
       <!-- ============ AUTHORIZATION ============ -->
       <h2>Authorization</h2>
       <div class="scope" style="margin-bottom:6px"><b style="color:var(--navy)">What happens after you sign</b><ul>
-        <li><b>1. Pay the $750</b> on the confirmation screen right after you sign, or from the link we email you.</li>
+        <li><b>1. Your invoice arrives by email</b> for the $750 fee, for the payment method you chose above. The build starts when it is paid.</li>
         <li><b>2. We rebuild</b> the workspace, audience, page and creative under the new brand. About two to three weeks.</li>
         <li><b>3. Launch call</b> to test the phone forward and approve the first postcard, then the program is live for the pest business.</li>
       </ul></div>
@@ -356,7 +359,7 @@
     <div id="done">
       <div class="big">&#10003;</div>
       <h2>Received. The rebuild starts now.</h2>
-      <p>Pay the $750 transfer and onboarding fee below, or from the link we email you. Onboarding starts the day it lands.
+      <p>Your invoice for the transfer and onboarding fee arrives by email. Onboarding starts the day it is paid.
       We will review everything you sent, move your photos into the new brand workspace, and reach out to set the launch call.
       Expect a preview of the new landing page and postcard within two to three weeks.</p>
       <p id="paywrap"></p>
@@ -378,8 +381,12 @@ const $ = id => document.getElementById(id);
 const val = id => ($(id).value || "").trim();
 
 function launchCards() { return $("o-launch").checked ? parseInt($("launchqty").value, 10) : 0; }
+function isCard() { const c=document.querySelector("input[name=pay]:checked"); return !!c && c.value==="card"; }
 function recalc() {
   const cards = launchCards();
+  const fee = isCard() ? Math.round(FEE*1.03) : FEE;
+  if ($("duenow")) { $("duenow").textContent = "$" + fee.toLocaleString(); $("duewhat").innerHTML = "&#183; transfer &amp; onboarding fee, " + (isCard() ? "by card incl. 3%" : "by bank transfer"); }
+  if ($("c-ach")) { $("c-ach").style.borderColor = isCard() ? "var(--line)" : "var(--blue)"; $("c-card").style.borderColor = isCard() ? "var(--blue)" : "var(--line)"; }
   const amt = "$" + Math.round(parseInt($("launchqty").value, 10) * CARD).toLocaleString();
   $("launchprice").textContent = amt;
   $("launchamt").textContent = amt;
@@ -484,8 +491,8 @@ async function submitAll() {
         plan: "transfer-remaining-term",
         plan_label: "Program transfer from Junk Majesty: remaining prepaid term through 2026-12-05 + $750 transfer/onboarding fee" +
           (cards ? " + launch drop " + cards + " cards $" + cardAmt + " (billed at proof)" : ""),
-        setup_fee: FEE, due_now: FEE, monthly_total: 0, term_months: 0,
-        payment_method: "card",
+        setup_fee: FEE, due_now: isCard() ? Math.round(FEE*1.03) : FEE, monthly_total: 0, term_months: 0,
+        payment_method: isCard() ? "card" : "ach",
         admin: { name: intake["Owner full name"], email: intake["Owner email"] },
         chairs: [],
         zips_text: "TRANSFER: Junk Majesty -> " + intake["Company name (DBA)"] + " (" + intake["Legal business name"] + ") | remaining prepaid term through 2026-12-05 transfers | $750 fee due now via payment link" +
