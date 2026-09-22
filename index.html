@@ -372,7 +372,7 @@ const ENDPOINT = "https://pboxaamvtrgwnhgfccbv.supabase.co/functions/v1/proposal
 const TOKEN = "gsm-proposal-2026";
 const PROGRAM = "rriq-pest";
 const FEE = 750, CARD = 1.20;
-const PAY_LINK = "https://links.groupserv.biz/payment-link/6a9ad982ceb12d9fc1a8b13e"; // Stripe payment link for the $750 fee; when set, the done screen shows a Pay Now button.
+const PAY_LINK = ""; // 2026-09-22 rule: no pay link on proposal pages; invoice goes from QuickBooks after the client chooses ACH or card. // Stripe payment link for the $750 fee; when set, the done screen shows a Pay Now button.
 const STORE = "rriq_pest_transfer_v2";
 const $ = id => document.getElementById(id);
 const val = id => ($(id).value || "").trim();
